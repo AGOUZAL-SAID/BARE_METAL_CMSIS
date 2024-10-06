@@ -29,6 +29,9 @@ ldr r1, =0x10003000
 ldr r2, =32
 bl etape2 
 
+END:
+B END
+
 
 /*remplissage*/
 
