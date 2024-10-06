@@ -28,7 +28,7 @@ str r9,[r0]
 add r1,r1,#4
 add r0,r0,#4
 SUBS r3,r3,#-4
-bnq loop2
+bne loop2
 
 end : 
 b end 

@@ -6,7 +6,7 @@
 
 .global _start
 _start:
-/*premier remplisssage et copage*/
+/*premier remplisssage et copage par 0xdeadbeef*/
 ldr r0,=0x10000000
 ldr r1,= 0xdeadbeef
 ldr r2,= 256
@@ -17,7 +17,7 @@ ldr r1, =0x10000000
 ldr r2, =256
 bl etape2 
 
-/* deuxiemme remplissage et copage*/
+/* deuxiemme remplissage et copage 0xcafecafe*/
 
 ldr r0,=0x10003000
 ldr r1,= 0xcafecafe
@@ -49,6 +49,6 @@ str r9,[r0]
 add r1,r1,#4
 add r0,r0,#4
 SUBS r2,r2,#-4
-bnq etape2
+bne etape2
 bx lr
 
