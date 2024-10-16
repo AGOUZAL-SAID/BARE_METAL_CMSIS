@@ -1,0 +1,19 @@
+1 :
+-Os :    Réduit la taille du code, résultant en des sections de données plus petites.
+-O0 :    Génére le code le plus volumineux, car toutes les variables sont conservées même si elles ne sont pas utilisées.
+-O1 :    réduire légèrement la taille des sections de données par rapport à -O0.
+-O2 :    aucune remarque de différence.
+
+2 :
+const char mesg[] : 
+mesg est accessible globalement. Il est placé dans la section .rodata  car il s'agit d'une chaîne constante.
+static const char mesg[] : 
+Il est toujours placé dans la section .rodata.mais le fait qu'il soit statique signifie que sa visibilité est restreinte, 
+ce qui peut réduire la taille de l'exécutable final si ce symbole est le seul point d'accès
+                                ***les différences sont visibiles avec -O0 ***
+
+
+3 : 
+En passant à "const char *mesg" et "const char * const mesg", la section de données devient plus petite, car seule
+l'adresse du tableau est stockée, et non le contenu du tableau lui-même cela peut réduire la taille de la section .data
+                    

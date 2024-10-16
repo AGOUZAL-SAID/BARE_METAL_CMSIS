@@ -1,0 +1,5 @@
+GCC ne sait pas si a, b et c pointent vers la même adresse mémoire ou non
+En d'autres termes, il existe un risque de pointeurs alias (aliasing)
+Si a ou b pointaient vers la même adresse que c modifier *a ou *b pourrait
+aussi modifier *c et Donc GCC recharge *c pour s'assurer que la valeur est 
+correcte à chaque fois
