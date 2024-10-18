@@ -1,24 +1,28 @@
-CC          := arm-none-eabi-gcc 
-LD           = arm-none-eabi-ld
-TARGET_ARCH := -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mthumb
-CFLAGS      := -g -O1
-LDFLAGS      = -nostdlib -ffreestanding -T ld_ram.lds 
-C_FILES     := $(wildcard *.c)
-OBJS   := $(patsubst %.c, %.o, $(C_FILES))
-EXCUTABLES := $(patsubst %.c, %, $(C_FILES))
 PREFIX       = arm-none-eabi-
 AS           = $(PREFIX)as
+CC           = $(PREFIX)gcc 
+LD           = $(PREFIX)ld
+
+TARGET_ARCH  = -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mthumb
+
+CFLAGS       = -g -O1 -Wall -Wextra -Werror
+ASFLAGS      = -g -mcpu=cortex-m4 -mthumb
+LDFLAGS      = -nostdlib -ffreestanding -T ld_ram.lds 
+
 .PHONY: startgdbserver 
 
-ifeq ($(EXEC),)
-	$(error il faut definir le variable EXEC par le nom d'excutable à a linker)
-endif
+EXEC = main
+OBJS = crt0.o main.o  init.o led.o
 
-$(EXEC): $(EXEC).o crt0.o init.o
-	$(CC) $(LDFLAGS) $^ -o $@ 
+all: $(EXEC)
+
+$(EXEC): $(OBJS)
+	$(CC) $(LDFLAGS) $(TARGET_ARCH) $^ -o $@
 
 startgdbserver :
 	JLinkGDBServer -device STM32L475VG -endian little -if SWD -speed auto -ir -LocalhostOnly
-
+debug: $(EXEC)
+	arm-none-eabi-gdb -x se203.gdb $<
 clean :
-	rm -f *.o $(EXCUTABLES)
+	rm -f $(EXEC)
+	rm -f $(OBJS)
