@@ -6,7 +6,8 @@
 
 
 _start:
-ldr r13, =0x10007fff
-bl init_bss
-bl main
-_exit: b _exit
+    ldr sp, =_stack
+    bl init_bss
+    bl main
+_exit:
+    b _exit

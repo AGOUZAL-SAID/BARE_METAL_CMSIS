@@ -11,7 +11,7 @@ define split
 end
 
 # interface with C source, regs and cmd windows
-define ss
+define ssplit
   layout split
   layout src
   layout regs
