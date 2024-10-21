@@ -1,7 +1,11 @@
 #include "led.h"
+#include "clocks.h"
+
+
+
 int main(){
     led_init();
-    //for (int i =0 ; i<10 ; i++){
+    clocks_init();
     while (1)
     {
     
