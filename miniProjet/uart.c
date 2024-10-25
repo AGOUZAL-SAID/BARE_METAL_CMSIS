@@ -9,7 +9,7 @@ void uart_init(){
 
     GPIOB->MODER     =  (GPIOB->MODER   & ~GPIO_MODER_MODE6_Msk)        | (2 << GPIO_MODER_MODE6_Pos)         ;
     
-    GPIOB->MODER     =  (GPIOB->MODER   & ~GPIO_MODER_MODE7_Msk)        | (2 << GPIO_MODER_MODE7_Pos)         ;                                           ; 
+    GPIOB->MODER     =  (GPIOB->MODER   & ~GPIO_MODER_MODE7_Msk)        | (2 << GPIO_MODER_MODE7_Pos)         ;                                            
     
     GPIOB->AFR[0]    =  (GPIOB->AFR[0]  & ~GPIO_AFRL_AFSEL6_Msk)        | (7<<GPIO_AFRL_AFSEL6_Pos)     ;
     
