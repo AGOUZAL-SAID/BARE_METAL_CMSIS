@@ -1,7 +1,9 @@
 #include "stm32l475xx.h"
 #include "matrix.h"
 
-
+extern uint8_t _binary_image_raw_start;
+extern uint8_t _binary_image_raw_end;
+extern uint8_t _binary_image_raw_size;
 
 typedef struct {
     uint8_t r;
@@ -179,16 +181,6 @@ void matrix_init() {
 
 } 
 
-/*
-    RST(x)
-    SB(x)
-    LAT(x)
-    SCK(x)
-    SDA(x)
-    ROW0(x) à ROW7(x)
-*/
-
-
 
 void deactivate_rows(){
     ROW0(0);
@@ -279,3 +271,24 @@ void test_pixels(){
         deactivate_rows();
     } 
 }
+
+void test_static(){
+    while(1){
+        rgb_color coleur_ligne[8];
+        uint8_t * pt = &_binary_image_raw_start;
+        for(int i = 0 ; i<8 ; i++) {
+            rgb_color * cpt = &coleur_ligne[0];
+            for(int i=0; i<8;i++){
+                cpt->r = *pt ; 
+                pt++;
+                cpt->g = *pt;
+                pt++;
+                cpt->b = *pt;
+                pt++;
+                cpt++;
+            }
+            cpt = &coleur_ligne[0];
+            mat_set_row(i, cpt);
+            deactivate_rows();
+        }
+}}

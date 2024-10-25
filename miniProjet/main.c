@@ -5,5 +5,5 @@
 int main(){
     clocks_init();
     matrix_init();
-    test_pixels();
+    test_static();
 } 

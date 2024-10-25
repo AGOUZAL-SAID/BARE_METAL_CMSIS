@@ -11,12 +11,15 @@ LDFLAGS      = -nostdlib -ffreestanding -T ld_ram.lds
 .PHONY: startgdbserver 
 
 EXEC = main
-OBJS = crt0.o  init.o  clocks.o main.o matrix.o
+OBJS = crt0.o  init.o  clocks.o main.o matrix.o image.o
 
 all: $(EXEC)
 
 $(EXEC): $(OBJS)
 	$(CC) $(LDFLAGS) $(TARGET_ARCH) $^ -o $@
+
+image.o : image.raw
+	$(PREFIX)objcopy -I binary -O elf32-littlearm -B armv7e-m $< $@
 
 startgdbserver :
 	JLinkGDBServer -device STM32L475VG -endian little -if SWD -speed auto -ir -LocalhostOnly
