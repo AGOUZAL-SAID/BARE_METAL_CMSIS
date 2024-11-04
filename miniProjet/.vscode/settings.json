@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "system_stm32l4xx.h": "c",
+        "core_cm4.h": "c",
+        "stm32l4xx.h": "c",
+        "stm32l475xx.h": "c"
+    },
+    "C_Cpp.default.compilerPath": "/usr/bin/gcc-12"
+}

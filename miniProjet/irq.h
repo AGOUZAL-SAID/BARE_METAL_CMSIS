@@ -1,0 +1,2 @@
+
+void irq_init();

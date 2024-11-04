@@ -35,13 +35,4 @@ void led(enum state comand){
         REG_GPIOC_MODER          = (GPIOC->MODER & ~GPIO_MODER_MODE9_Msk) ;
     } 
 
-/*   
-la fonction sleep prend un nombre entier qui represant le temps en ms
-*/
-
-void sleep(unsigned int time ){
-    unsigned int k = time * 4000;
-    for (unsigned int i = 0; i<k; i++){
-        asm volatile("nop");
-        }
-} 
+ 

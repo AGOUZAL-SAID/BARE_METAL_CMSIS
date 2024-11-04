@@ -7,5 +7,3 @@ enum state{LED_OFF,LED_YELLOW,LED_BLUE} ;
 
 void led(enum state comand);
 
-
-void sleep(unsigned int time );
