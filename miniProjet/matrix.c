@@ -122,34 +122,27 @@ void ROW7(int x){
 /*
 la fonction sleep force le processeur a ne rien faire pendant un temps "time" en us 
 */
-void sleep(unsigned int time ){
-    unsigned int k = time * 30;
-    for (unsigned int i = 0; i<k; i++){
+static inline void sleep(unsigned int time ){
+    for (unsigned int i = 0; i<time; i++){
         asm volatile("nop");
-        }
+    }
 } 
 
 void pulse_SCK(){
-    SCK(0);
-    sleep(1);
     SCK(1);
     sleep(1);
     SCK(0);
-    sleep(1);
 }
 
 void pulse_LAT(){
-    Lat(1);
-    sleep(1);
     Lat(0);
     sleep(1);
     Lat(1);
-    sleep(1);
 }
 void init_bank0(){
     SB(0);
+    SDA(1);
     for(int i = 0 ; i<144 ;i++){
-        SDA(1);
         pulse_SCK();
     } 
     pulse_LAT();
@@ -234,12 +227,11 @@ void send_byte(uint8_t val){
 }
 
 void mat_set_row(int row, const rgb_color *val){
-        activate_row(row);
+    activate_row(row);
     for (int i=0; i<8 ; i++){
-        send_byte(val->b);
-        send_byte(val->g);
-        send_byte(val->r);
-        val++;
+        send_byte(val[i].b);
+        send_byte(val[i].g);
+        send_byte(val[i].r);
     } 
     pulse_LAT();
 } 
@@ -318,3 +310,14 @@ void afficher_trame(){
     }
 }
 
+
+
+void init_tram(){
+    uint8_t * trame_depart = &trame_global[0];
+    uint8_t * pt_data      = &_binary_image_raw_start;
+    for(int i =0 ; i<192 ; i++){
+        *trame_depart = *pt_data;
+        trame_depart++;
+        pt_data++;
+    }
+}

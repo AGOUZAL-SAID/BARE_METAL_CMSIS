@@ -35,10 +35,3 @@ void enable_interruption_uart(){
     USART1->CR1 = (USART1->CR1 & ~(USART_CR1_RXNEIE_Msk)) | ( 1<< USART_CR1_RXNEIE_Pos ) ; 
     NVIC_EnableIRQ(37) ;
 }
-void init_tram(){
-    for(int i =0;i<192;i++){
-        *trame_depart = 0;
-        trame_depart++;
-    }
-    trame_depart=&trame_global[0];
-}

@@ -6,3 +6,4 @@ void test_pixels();
 void test_static();
 void pulse_LAT();
 void send_byte(uint8_t val);
+void init_tram();

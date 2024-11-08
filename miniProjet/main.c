@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "uart.h"
 #include "uart_irq.h"
+#include "timer.h"
 
 int main(){
     clocks_init();
@@ -12,5 +13,5 @@ int main(){
     irq_init();
     init_tram();
     enable_interruption_uart();
-    afficher_trame();
+    timer_init(1000);
 } 
