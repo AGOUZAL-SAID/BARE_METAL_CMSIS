@@ -2,7 +2,7 @@
 
 typedef unsigned int size_t;
 
-void uart_init(){
+void uart_init(int baudrate){
     USART1 ->CR1     =  (USART1 ->CR1   & ~USART_CR1_UE_Msk);
 
     RCC  ->AHB2ENR   =   RCC->AHB2ENR   | RCC_AHB2ENR_GPIOBEN;
@@ -23,7 +23,7 @@ void uart_init(){
     
     RCC  ->APB2RSTR  =  (RCC  ->APB2RSTR& ~RCC_APB2RSTR_USART1RST_Msk )                                  ;
 
-    USART1->BRR      =  (USART1 -> BRR  & ~USART_BRR_DIV_FRACTION_Msk   & ~USART_BRR_DIV_MANTISSA_Msk) | (694 << USART_BRR_DIV_FRACTION_Pos);
+    USART1->BRR      =  (USART1 -> BRR  & ~USART_BRR_DIV_FRACTION_Msk   & ~USART_BRR_DIV_MANTISSA_Msk) | ((80000000/baudrate) << USART_BRR_DIV_FRACTION_Pos);
     
     USART1->CR1      =  0                                                                               ;
     

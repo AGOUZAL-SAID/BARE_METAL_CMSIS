@@ -4,6 +4,7 @@
 extern uint8_t _binary_image_raw_start;
 extern uint8_t _binary_image_raw_end;
 extern uint8_t _binary_image_raw_size;
+uint8_t trame_global[192];
 
 typedef struct {
     uint8_t r;
@@ -292,3 +293,28 @@ void test_static(){
             deactivate_rows();
         }
 }}
+
+void afficher_trame(){
+    while(1){
+        
+        uint8_t * trame_fin = (uint8_t * ) &trame_global[191];  
+        for(int  i = 0 ; i<8 ; i++){
+            
+            for(int j = 0 ; j < 8 ; j++){
+                send_byte(*trame_fin);
+                trame_fin--;
+                send_byte(*trame_fin);
+                trame_fin--;
+                send_byte(*trame_fin);
+                trame_fin--;
+            }
+
+            pulse_LAT();
+            activate_row(7-i);
+            sleep(200);
+            deactivate_rows();
+        } 
+        
+    }
+}
+
