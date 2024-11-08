@@ -8,16 +8,27 @@ uint8_t * trame_depart = &trame_global[0];
 static uint8_t   position_in_trame = 0;
 
 void USART1_IRQHandler(void) {
-    uint8_t data = uart_getchar();
-    if((data == 0xff) | (position_in_trame == 192)){
+        uint8_t data = uart_getchar();
+    if(~(USART1->ISR & USART_ISR_FE_Msk) & ~(USART1->ISR & USART_ISR_ORE_Msk)){
+        if((data == 0xff) | (position_in_trame == 192)){
             trame_depart = &trame_global[0] ;
             position_in_trame=0;
         }
+        else{
+            *trame_depart=data;
+            trame_depart++;
+            position_in_trame++;}    
+    }
     else{
-        *trame_depart=data;
-        trame_depart++;
-        position_in_trame++;}    
-    }  
+        if(data == 0xff ){
+            trame_depart = &trame_global[0] ;
+            position_in_trame=0;
+            USART1->ICR = (USART1->ICR &~(USART_ICR_FECF_Msk)) | (1<<USART_ICR_FECF_Pos); 
+            USART1->ICR = (USART1->ICR &~(USART_ICR_ORECF_Msk)) | (1<<USART_ICR_ORECF_Pos);
+        }
+    }
+    }
+  
     
 
 void enable_interruption_uart(){

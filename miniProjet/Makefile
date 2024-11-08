@@ -11,7 +11,7 @@ LDFLAGS      = -nostdlib -ffreestanding -T ld_ram.lds
 .PHONY: startgdbserver 
 
 EXEC = main
-OBJS = crt0.o  init.o  main.o matrix.o irq.o uart.o uart_irq.o image.o
+OBJS = crt0.o  init.o clocks.o main.o matrix.o irq.o uart.o uart_irq.o image.o
 
 all: $(EXEC)
 
