@@ -18,21 +18,11 @@ void timer_init(int max_us)
     TIM2->CR1 = (TIM2->CR1 & ~(TIM_CR1_CEN_Msk)) | (1 << TIM_CR1_CEN_Pos);
 }
 
-static int count_time = 0;
 static int ligne = 0;
-static const int mSecond = 1;
 static uint8_t *trame_timer_end = &trame_global[191];
 
 void TIM2_IRQHandler(void){
-    TIM2->SR = (TIM2->SR & ~(TIM_SR_UIF_Msk));
-    if (count_time != mSecond)
-    {
-        count_time++;
-        return;
-    }
-
-    count_time = 0;
-    
+    TIM2->SR = (TIM2->SR & ~(TIM_SR_UIF_Msk));    
     deactivate_rows();
     if (ligne == 8)
     {

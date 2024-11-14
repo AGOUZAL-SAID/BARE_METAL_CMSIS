@@ -9,14 +9,19 @@ sram2 (wx) : ORIGIN = 0x10000000, LENGTH = 32K
 _stack = ORIGIN(sram2) + LENGTH(sram2) ;
 
 SECTIONS {
+
+    .vector_table : AT(ORIGIN(rom)) {
+        *(.vector_table)
+    } >rom
+
     .text : {
         *(.text)
-    }>sram1
+    }>rom
 
 
     .rodata : {
         *(.rodata)
-    }>sram1
+    }>rom 
 
 
     .data : {

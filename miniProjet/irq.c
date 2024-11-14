@@ -106,7 +106,7 @@ MAKE_DEFAULT_HANDLER(RNG_IRQHandler);
 MAKE_DEFAULT_HANDLER(FPU_IRQHandler);
 
 
-void * const vector_table[] __attribute__((aligned(512))) = {
+__attribute__((aligned(512),section(".vector_table")))void * const vector_table[] __attribute__((aligned(512))) = {
     // Pile et Reset Handler
     &_stack,                         // Sommet de la pile (SP initial)
     &_start,                          // Handler de Reset (PC initial)

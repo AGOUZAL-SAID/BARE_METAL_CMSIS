@@ -18,8 +18,6 @@ void button_init() {
 void EXTI15_10_IRQHandler(void) { 
 
         static uint8_t etat = 0;
-        
-        for (unsigned int i = 0; i<20000; i++){asm volatile("nop");}
 
         if(etat ==0){
             led_g_on();
