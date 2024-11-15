@@ -26,7 +26,11 @@ SECTIONS {
         VMA_vector = .;
         *(.vector_table)
     } >sram1 AT>rom
-
+    
+    .copage_section : {
+        *(.copage_section)
+    }>rom
+    
     .text : {
         VMA_text = . ;
         *(.text)

@@ -7,7 +7,8 @@
 
 
 extern uint32_t _stack;
-extern uint32_t _start;
+extern void _start();
+
 #define MAKE_DEFAULT_HANDLER(truc_IRQHandler) \
     void __attribute__((weak)) (truc_IRQHandler)(void) { \
         __disable_irq();  \
@@ -109,7 +110,7 @@ MAKE_DEFAULT_HANDLER(FPU_IRQHandler);
 __attribute__((aligned(512),section(".vector_table")))void * const vector_table[] __attribute__((aligned(512))) = {
     // Pile et Reset Handler
     &_stack,                         // Sommet de la pile (SP initial)
-    &_start,                          // Handler de Reset (PC initial)
+    _start,                          // Handler de Reset (PC initial)
 
     // Exceptions internes ARM Cortex-M4
     NMI_Handler,                     // NMI handler

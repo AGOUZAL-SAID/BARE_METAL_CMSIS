@@ -21,7 +21,7 @@ int memcmp( const void * mem1_p, const void * mem2_p, size_t size ){
     return 0;
 } 
 
-void * memcpy( void * destination, const void * source, size_t size ){ 
+__attribute__((section(".copage_section")))void * memcpy( void * destination, const void * source, size_t size ){ 
     for (unsigned int position=0; position<size; ++position ){
         *(uint8_t *)destination = * (uint8_t * )source ;
         destination++;
