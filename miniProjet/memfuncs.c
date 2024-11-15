@@ -4,11 +4,13 @@ typedef unsigned int size_t ;
 
 void * memset(void * bstart ,int a,size_t size){
     unsigned int finish =0;
-    unsigned int * p = (uint8_t *) bstart;
+    uint8_t * p = (uint8_t *) bstart;
     while (finish <= size){
         *p =(uint8_t) a ;
         p++;
-    }}
+    }
+    return bstart ;
+}
 
 
 int memcmp( const void * mem1_p, const void * mem2_p, size_t size ){ 
@@ -25,7 +27,9 @@ void * memcpy( void * destination, const void * source, size_t size ){
         destination++;
         source++; 
     }  
+    return destination;
 }  
+
 void * memmove( void * destination, const void * source, size_t size ){ 
     uint8_t  intermedium = 0;
     for (unsigned int position=0; position<size; ++position ){
@@ -42,5 +46,5 @@ void * memmove( void * destination, const void * source, size_t size ){
         }     
     }  
 
-
+    return destination;
 } 

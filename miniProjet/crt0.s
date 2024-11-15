@@ -7,6 +7,7 @@
 
 _start:
     ldr sp, =_stack
+    bl copy_sections
     bl init_bss
     bl main
 _exit:
