@@ -1,4 +1,0 @@
-Le registre sp est mal placé donc lorsque on veut creé 
-des variables local dans la pile le processeur trouves
-que la place de sp est pas dans une zone memoire dedie
-au Pile.

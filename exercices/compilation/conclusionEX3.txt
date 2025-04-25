@@ -1,5 +1,0 @@
-L'ordre des section : 
-l'excution du fichier ex3-1 permet de voir l'ordre des sections.
-
-La pile :
-on remarque après excution du fichier ex3-2 que la pile décroit.

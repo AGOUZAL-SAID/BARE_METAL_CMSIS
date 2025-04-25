@@ -1,0 +1,1 @@
+void timer_init(int max_us);

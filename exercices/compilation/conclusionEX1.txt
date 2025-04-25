@@ -1,4 +1,0 @@
-concernant le changement de type de  variable de boucle i :
-On conclu que nous avons gagné un peux de performance
-c'est à dire on a arrivé a diminuer le nombre d'instructions
-excuté par le processeur mais on a perdu de la memoire.
